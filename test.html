@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="./simple-kakao-map/simple-kakao-map.min.css" />
+  <title>Simple Kakao Map</title>
+</head>
+
+<body>
+  <div class="map_wrap radius_border">
+    <div id="kakaoMap"></div>
+  </div>
+
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?libraries=services&appkey=d29846c3b92dd2f8fbbfbd0009bd6976"></script>
+  <script src="./simple-kakao-map/simple-kakao-map.min.js"></script>
+  <script>
+    const address = '버드나루로 88';
+    const locationName = '아크로';
+    simpleKakaoMap(address)
+  </script>
+</body>
+
+</html>

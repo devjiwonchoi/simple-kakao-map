@@ -80,11 +80,11 @@ function setMapType(map, maptype) {
   if (maptype === 'roadmap') {
     map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
     roadmapControl.className = 'selected_btn';
-    skyviewControl.className = 'btn';
+    skyviewControl.className = 'mapTypeControlButton';
   } else {
     map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
     skyviewControl.className = 'selected_btn';
-    roadmapControl.className = 'btn';
+    roadmapControl.className = 'mapTypeControlButton';
   }
 }
 
@@ -102,4 +102,20 @@ function zoomIn(map) {
  */
 function zoomOut(map) {
   map.setLevel(map.getLevel() + 1);
+}
+
+/**
+ * @description 카카오맵 하단부에 로드뷰, 길찾기, 지도 크게보기 링크를 추가하는 함수
+ * @param locationName {string} 지도에 표시될 장소 이름
+ * @param latitude {number} 지도에 표시될 장소의 위도
+ * @param longtitude {number} 지도에 표시될 장소의 경도
+*/
+function renderBottomBar(locationName, latitude, longtitude) {
+  const gotoRoadview = document.getElementById('gotoRoadview');
+  const gotoFindMap = document.getElementById('gotoFindMap');
+  const gotoMap = document.getElementById('gotoMap');
+
+  gotoRoadview.setAttribute('href', `https://map.kakao.com/link/roadview/${latitude},${longtitude}`); //로드뷰
+  gotoFindMap.setAttribute('href', `https://map.kakao.com/link/to/${locationName},${latitude},${longtitude}`); //길찾기
+  gotoMap.setAttribute('href', `https://map.kakao.com/link/search/${locationName}`); //지도 크게 보기
 }

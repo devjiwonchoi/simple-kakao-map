@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <div class="map_wrap">
+  <div class="map_wrap radius_border">
     <div id="kakaoMap" style="width: 100%; height: 100%; position: relative; overflow: hidden"></div>
     <div class="custom_typecontrol radius_border">
       <span id="btnRoadmap" class="selected_btn"
@@ -22,21 +22,30 @@
       <span onclick="zoomOut(map)"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
           alt="축소" /></span>
     </div>
+    <span id="moveToCenterBtn" onclick="moveToCenter(map, latitude, longitude)">
+      <img src="./reset_icon.png" alt="중심" />
+    </span>
+    <div class="wrap_controllers hide">
+      <a class="tit_controllers" href="https://map.kakao.com" target="_blank">
+        <img src="//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/logo_kakaomap.png" width="72" height="16" alt="카카오맵" style="display:block;width:72px;height:16px">
+      </a>
+      <div class="wrap_btn">
+        <a id="gotoRoadview" target="_blank" href=>로드뷰</a>
+        <a id="gotoFindMap" target="_blank">길찾기</a>
+        <a id="gotoMap" target="_blank">지도뷰</a>
+      </div>
+    </div>
   </div>
-  <p>
-    <button onclick="moveToCenter(map, latitude, longitude)">
-      지도 중심좌표로 이동시키기
-    </button>
-  </p>
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d29846c3b92dd2f8fbbfbd0009bd6976"></script>
-  <script src="./kakaomap.js"></script>
+
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?libraries=services&appkey=d29846c3b92dd2f8fbbfbd0009bd6976"></script>
+  <script src="./simple-kakao-map.js"></script>
   <script>
     const latitude = 37.566826;
     const longitude = 126.9786567;
-    const map = renderKakaoMap(latitude, longitude, 3);
-    const marker = renderMarker(map, latitude, longitude);
+    const address = '국회대로 54길 10';
+    const locationName = '아크로';
 
-    renderMarkerInfo(map, marker, 'Hello!');
+    simpleKakaoMap(address, locationName)
   </script>
 </body>
 
