@@ -1,0 +1,17 @@
+{
+  "name": "simple-kakaomap",
+  "version": "0.0.0",
+  "description": "Simple Kakao Map for HTML, PHP, JSP, ASP, etc.",
+  "main": "simple-kakao-map.js",
+  "type": "module",
+  "repository": "https://github.com/devjiwonchoi/simple-kakao-map",
+  "keywords": [
+    "kakao",
+    "map",
+    "simple",
+    "node"
+  ],
+  "author": "Jiwon Choi",
+  "license": "MIT",
+  "private": false
+}
