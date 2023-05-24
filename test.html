@@ -3,21 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="./skm.min.css" />
   <title>Simple Kakao Map</title>
 </head>
 
 <body>
-  <div class="map_wrap radius_border">
-    <div id="kakaoMap"></div>
-  </div>
+  <div id="kakaoMap"></div>
 
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?libraries=services&appkey=d29846c3b92dd2f8fbbfbd0009bd6976"></script>
+  <!-- <script src="./simple-kakao-map.js"></script> -->
   <script src="./skm.min.js"></script>
   <script>
     const address = '제주특별자치도 제주시 첨단로 242';
-    const locationName = '아크로';
-    simpleKakaoMap(address)
+    SimpleKakaoMap('d29846c3b92dd2f8fbbfbd0009bd6976', address, '카카오 본사')
   </script>
 </body>
 

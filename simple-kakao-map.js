@@ -1,8 +1,144 @@
-function simpleKakaoMap(address, locationName = null) {
-  const container = document.getElementById('kakaoMap');
-  container.insertAdjacentHTML(
-    'afterend',
-    `<div class="custom_typecontrol radius_border">
+function appendKakaoMapStyle() {
+  const style = document.createElement('style');
+  style.innerHTML = `
+  .map_wrap {
+    position: relative;
+    overflow: hidden;
+    width: 50vw;
+    height: 50vh;
+  }
+  
+  #kakaoMap {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .radius_border {
+    border: 1px solid #919191;
+    border-radius: 5px;
+  }
+  
+  .custom_typecontrol {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    overflow: hidden;
+    width: 130px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    font-size: 12px;
+    font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+  }
+  
+  .custom_typecontrol span {
+    display: block;
+    width: 65px;
+    height: 30px;
+    float: left;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    background: linear-gradient(#fff, #e6e6e6);
+  }
+  
+  .custom_typecontrol .not_selected_btn {
+    background: #fff;
+    background: linear-gradient(#fff, #e6e6e6);
+  }
+  
+  .custom_typecontrol .not_selected_btn:hover {
+    background: #f5f5f5;
+    background: linear-gradient(#f5f5f5, #e3e3e3);
+  }
+  
+  .custom_typecontrol .not_selected_btn:active {
+    background: #e6e6e6;
+    background: linear-gradient(#e6e6e6, #fff);
+  }
+  
+  .custom_typecontrol .selected_btn {
+    color: #fff;
+    background: #425470;
+    background: linear-gradient(#425470, #5b6d8a);
+  }
+  
+  .custom_typecontrol .selected_btn:hover {
+    color: #fff;
+  }
+  
+  .custom_zoomcontrol {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 36px;
+    height: 80px;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #f5f5f5;
+  }
+  
+  .custom_zoomcontrol span {
+    display: block;
+    width: 36px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .custom_zoomcontrol span img {
+    width: 15px;
+    height: 15px;
+    padding: 12px 0;
+    border: none;
+  }
+  
+  .custom_zoomcontrol span:first-child {
+    border-bottom: 1px solid #bfbfbf;
+  }
+  
+  #moveToCenterBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 150px;
+    right: 10px;
+    width: 36px;
+    height: 40px;
+    overflow: hidden;
+    border: 1px solid #919191;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    z-index: 1;
+  } 
+  
+  #moveToCenterBtn img {
+    width: 20px;
+    height: 20px;
+  }
+  `;
+  document.head.appendChild(style);
+}
+
+function SimpleKakaoMap(appKey, address, locationName = null) {
+  appendKakaoMapStyle();
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = `//dapi.kakao.com/v2/maps/sdk.js?libraries=services&autoload=false&appkey=${appKey}`;
+  script.onload = () => {
+    kakao.maps.load(() => {
+      const container = document.getElementById('kakaoMap');
+      const wrapperDiv = document.createElement('div');
+      wrapperDiv.classList.add('map_wrap', 'radius_border');
+      container.parentNode.insertBefore(wrapperDiv, container);
+      wrapperDiv.appendChild(container);
+
+      container.insertAdjacentHTML(
+        'afterend',
+        `<div class="custom_typecontrol radius_border">
       <span id="btnRoadmap" class="selected_btn">지도</span>
       <span id="btnSkyview" class="not_selected_btn">스카이뷰</span>
     </div>
@@ -17,49 +153,52 @@ function simpleKakaoMap(address, locationName = null) {
     </div>
 
     <span id="moveToCenterBtn">
-      <img src="./reset_icon.png" alt="중심" />
+      <img src="https://icon2.cleanpng.com/20180203/jxe/kisspng-reset-button-icon-restart-png-photos5-5a7588a5446099.2178430315176521332801.jpg" alt="중심" />
     </span>`
-  );
+      );
 
-  const markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-  const options = {
-    center: markerPosition,
-    level: 3,
-  };
-  const map = new kakao.maps.Map(container, options);
-
-  const geocoder = new kakao.maps.services.Geocoder();
-  geocoder.addressSearch(address, (result, status) => {
-    if (status === kakao.maps.services.Status.OK) {
-      console.log(result);
-      const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-      const marker = new kakao.maps.Marker({
-        position: coords,
-        clickable: true,
-      });
-      marker.setMap(map);
-
-      const iwContent = `<span style="font-family: sans-serif">${
-          locationName ?? result[0].road_address?.building_name
-        }</span>`,
-        iwRemovable = true;
-      const infowindow = new kakao.maps.InfoWindow({
-        content: iwContent,
-        removable: iwRemovable,
-      });
-      kakao.maps.event.addListener(marker, 'click', () => {
-        infowindow.open(map, marker);
-      });
-      map.setCenter(coords);
-
-      const moveToCenterBtn = document.getElementById('moveToCenterBtn');
-      moveToCenterBtn.onclick = () => {
-        map.panTo(coords);
+      const markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+      const options = {
+        center: markerPosition,
+        level: 3,
       };
-    }
-  });
-  advancedKakaoMap(map, locationName);
+      const map = new kakao.maps.Map(container, options);
+
+      const geocoder = new kakao.maps.services.Geocoder();
+      geocoder.addressSearch(address, (result, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+          const marker = new kakao.maps.Marker({
+            position: coords,
+            clickable: true,
+          });
+          marker.setMap(map);
+
+          const iwContent = `<span style="font-family: sans-serif">${
+              locationName ?? result[0].road_address?.building_name
+            }</span>`,
+            iwRemovable = true;
+          const infowindow = new kakao.maps.InfoWindow({
+            content: iwContent,
+            removable: iwRemovable,
+          });
+          kakao.maps.event.addListener(marker, 'click', () => {
+            infowindow.open(map, marker);
+          });
+          map.setCenter(coords);
+
+          const moveToCenterBtn = document.getElementById('moveToCenterBtn');
+          moveToCenterBtn.onclick = () => {
+            map.panTo(coords);
+          };
+        }
+      });
+      advancedKakaoMap(map, locationName);
+    });
+  };
+
+  document.head.appendChild(script);
 }
 
 function advancedKakaoMap(map, locationName) {
