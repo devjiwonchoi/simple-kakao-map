@@ -25,3 +25,4 @@
 </script>
 ```
 ## Preview
+![Screenshot 2023-05-24 at 11 05 05 AM](https://github.com/devjiwonchoi/simple-kakao-map/assets/120007119/f6ce4422-048f-4147-9e5f-0176646a8963)
