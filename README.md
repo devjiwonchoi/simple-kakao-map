@@ -1,28 +1,27 @@
 # Simple Kakao Map
 
 ```
-스타일: https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/simple-kakao-map.min.css
-
-스크립트: https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/simple-kakao-map.min.js
+스크립트: https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/skm.min.js
 ```
 
 ## Usage
 
 ```html
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/skm.min.css">
-</head>
+// ...
 
-<div class="map_wrap radius_border">
-  <div id="kakaoMap"></div>
-</div>
+<!-- 이거 하나면 끝 -->
+<div id="kakaoMap"></div>
 
-<script src="//dapi.kakao.com/v2/maps/sdk.js?libraries=services&appkey=KAKAO_APP_KEY"></script>
+// ...
+
+<!-- skm.min.js 로드 -->
 <script src="https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/skm.min.js"></script>
 
 <script>
-    const address = '제주특별자치도 제주시 첨단로 242'; // 카카오 본사 주소
-    simpleKakaoMap(address);
+    const appKey = 'KAKAO_APP_KEY'; // 발급 받은 카카오 API 앱 키
+    const address = '제주특별자치도 제주시 첨단로 242'; // 입력할 주소
+    const locationName = '카카오 본사'; // 출력할 이름 (디폴트: 입력한 주소의 빌딩이름)
+    SimpleKakaoMap(appKey, address, locationName);
 </script>
 ```
 ## Preview
