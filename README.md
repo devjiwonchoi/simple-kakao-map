@@ -3,7 +3,8 @@
 ```
 https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/skm.min.js
 ```
-
+## Style
+> [simple-kakaomap.css](https://github.com/devjiwonchoi/simple-kakaomap/blob/main/simple-kakaomap.css) 참고
 ## Usage
 
 ```html
