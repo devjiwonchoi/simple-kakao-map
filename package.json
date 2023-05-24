@@ -2,9 +2,9 @@
   "name": "simple-kakaomap",
   "version": "0.0.0",
   "description": "Simple Kakao Map for HTML, PHP, JSP, ASP, etc.",
-  "main": "simple-kakao-map.js",
+  "main": "simple-kakaomap.js",
   "type": "module",
-  "repository": "https://github.com/devjiwonchoi/simple-kakao-map",
+  "repository": "https://github.com/devjiwonchoi/simple-kakaomap",
   "keywords": [
     "kakao",
     "map",
