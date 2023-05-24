@@ -1,6 +1,6 @@
 {
   "name": "simple-kakaomap",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Simple Kakao Map for HTML, PHP, JSP, ASP, etc.",
   "main": "simple-kakaomap.js",
   "type": "module",
