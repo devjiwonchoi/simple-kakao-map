@@ -1,7 +1,7 @@
 # Simple Kakao Map
 
 ```
-https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/skm.min.js
+https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakaomap@main/skm.min.js
 ```
 ## Style
 > [simple-kakaomap.css](https://github.com/devjiwonchoi/simple-kakaomap/blob/main/simple-kakaomap.css) 참고
@@ -16,7 +16,7 @@ https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/skm.min.js
 // ...
 
 <!-- skm.min.js 로드 -->
-<script src="https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakao-map@main/skm.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/devjiwonchoi/simple-kakaomap@main/skm.min.js"></script>
 
 <script>
     // SimpleKakaoMap(카카오 앱 키, 주소, 이름)
