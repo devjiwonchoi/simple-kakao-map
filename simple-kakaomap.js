@@ -119,6 +119,35 @@ function appendKakaoMapStyle() {
     width: 20px;
     height: 20px;
   }
+
+  #iw-custom-overlay-wrap{
+    width: 100%;
+    position: absolute;
+    top: -80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #iw-custom-overlay-wrap a{
+    text-decoration: none;
+  }
+  
+  .iw-txt{
+    display: block;
+    position: relative;
+    z-index: 10;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 15px;
+    background-color: #fff;
+    color: #222;
+    letter-spacing: -2px;
+  }
   `;
   document.head.appendChild(style);
 }
@@ -164,31 +193,30 @@ function SimpleKakaoMap(appKey, address, locationName = null) {
       };
       const map = new kakao.maps.Map(container, options);
       const geocoder = new kakao.maps.services.Geocoder();
-      
+
       geocoder.addressSearch(address, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
           const marker = new kakao.maps.Marker({
-            position: coords
+            position: coords,
           });
           marker.setMap(map);
 
-
           const iwContent = `
           <div id="iw-custom-overlay-wrap">
-            <a href="#none">
+            <a href="https://map.kakao.com/link/search/${locationName}">
               <span class="iw-txt" style="font-family: sans-serif;">
                 ${locationName ?? result[0].road_address?.building_name}
               </span>
             </a>
-          </div>`
+          </div>`;
           const customOverlay = new kakao.maps.CustomOverlay({
             position: coords,
-            content: iwContent
-        });
-          
-        customOverlay.setMap(map)
+            content: iwContent,
+          });
+
+          customOverlay.setMap(map);
           map.setCenter(coords);
 
           const moveToCenterBtn = document.getElementById('moveToCenterBtn');
