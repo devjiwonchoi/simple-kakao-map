@@ -163,29 +163,32 @@ function SimpleKakaoMap(appKey, address, locationName = null) {
         level: 3,
       };
       const map = new kakao.maps.Map(container, options);
-
       const geocoder = new kakao.maps.services.Geocoder();
+      
       geocoder.addressSearch(address, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
           const marker = new kakao.maps.Marker({
-            position: coords,
-            clickable: true,
+            position: coords
           });
           marker.setMap(map);
 
-          const iwContent = `<span style="font-family: sans-serif">${
-              locationName ?? result[0].road_address?.building_name
-            }</span>`,
-            iwRemovable = true;
-          const infowindow = new kakao.maps.InfoWindow({
-            content: iwContent,
-            removable: iwRemovable,
-          });
-          kakao.maps.event.addListener(marker, 'click', () => {
-            infowindow.open(map, marker);
-          });
+
+          const iwContent = `
+          <div id="iw-custom-overlay-wrap">
+            <a href="#none">
+              <span class="iw-txt" style="font-family: sans-serif;">
+                ${locationName ?? result[0].road_address?.building_name}
+              </span>
+            </a>
+          </div>`
+          const customOverlay = new kakao.maps.CustomOverlay({
+            position: coords,
+            content: iwContent
+        });
+          
+        customOverlay.setMap(map)
           map.setCenter(coords);
 
           const moveToCenterBtn = document.getElementById('moveToCenterBtn');
