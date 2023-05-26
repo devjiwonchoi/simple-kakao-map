@@ -205,7 +205,7 @@ function SimpleKakaoMap(appKey, address, locationName = null) {
 
           const iwContent = `
           <div id="iw-custom-overlay-wrap">
-            <a href="https://map.kakao.com/link/search/${locationName}">
+            <a target="_blank" href="https://map.kakao.com/link/search/${locationName}">
               <span class="iw-txt" style="font-family: sans-serif;">
                 ${locationName ?? result[0].road_address?.building_name}
               </span>
@@ -225,14 +225,14 @@ function SimpleKakaoMap(appKey, address, locationName = null) {
           };
         }
       });
-      advancedKakaoMap(map, locationName);
+      advancedKakaoMap(map);
     });
   };
 
   document.head.appendChild(script);
 }
 
-function advancedKakaoMap(map, locationName) {
+function advancedKakaoMap(map) {
   const zoomIn = document.getElementById('zoomIn');
   const zoomOut = document.getElementById('zoomOut');
 
