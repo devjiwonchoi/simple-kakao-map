@@ -116,3 +116,33 @@
   width: 20px;
   height: 20px;
 }
+
+/* info-window */
+#iw-custom-overlay-wrap{
+  width: 100%;
+  position: absolute;
+  top: -80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#iw-custom-overlay-wrap a{
+  text-decoration: none;
+}
+
+.iw-txt{
+  display: block;
+  position: relative;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 15px;
+  background-color: #fff;
+  color: #222;
+  letter-spacing: -2px;
+}
